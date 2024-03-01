@@ -1,6 +1,6 @@
 #method one...
 
-$action = New-ScheduledTaskAction -Execute 'WILDCARD'
+$action = New-ScheduledTaskAction -Execute 'Powershell.exe'
 $trigger =  New-ScheduledTaskTrigger -AtStartUp
 Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "winsysstart" -Description "Daily dump of Applog"
 
