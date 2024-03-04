@@ -1,1 +1,1 @@
-Powershell.exe ./payload.ps1
+./payload.ps1
