@@ -1,1 +1,1 @@
-Powershell.exe -NoProfile -ExecutionPolicy Bypass Start-Process -File bumper.bat -Verb Runas
+Powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden Start-Process -File bumper.bat -Verb Runas
