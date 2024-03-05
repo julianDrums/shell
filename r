@@ -1,1 +1,1 @@
-./payload.ps1
+powershell ./payload.ps1
