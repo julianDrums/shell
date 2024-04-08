@@ -1,5 +1,13 @@
-Invoke-WebRequest -Uri "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip" -OutFile "ffmpeg.zip"
+Invoke-WebRequest -Uri "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.7z" -OutFile "ffmpeg.7z"
 
-Expand-Archive -Path "ffmpeg.zip" -DestinationPath "C:\ffmpeg"
+Write-Host "Extracting..."
+7z x -y -o"C:\" "ffmpeg.7z"
 
-$env:Path += ";C:\ffmpeg\bin"
+$ffmpegFolder = Get-ChildItem -Path "C:\" -Filter "ffmpeg-*" -Directory
+Rename-Item -Path $ffmpegFolder -NewName "ffmpeg"
+
+Write-Host "Adding ffmpeg to PATH..."
+$envPath = [Environment]::GetEnvironmentVariable("PATH", "Machine")
+[Environment]::SetEnvironmentVariable("PATH", $envPath + ";C:\ffmpeg\bin", "Machine")
+
+Write-Host "ffmpeg is installed. Following commands are available: ffmpeg, ffplay, ffprobe"
