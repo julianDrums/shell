@@ -1,7 +1,7 @@
 Invoke-WebRequest -Uri "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.7z" -OutFile "ffmpeg.7z"
 
 Write-Host "Extracting..."
-7z x -y -o"C:\" "ffmpeg.7z"
+7z x -y -o"C:\" "ffmpeg.zip"
 
 $ffmpegFolder = Get-ChildItem -Path "C:\" -Filter "ffmpeg-*" -Directory
 Rename-Item -Path $ffmpegFolder -NewName "ffmpeg"
